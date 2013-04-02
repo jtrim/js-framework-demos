@@ -1,0 +1,127 @@
+body {
+  padding: 10px;
+  background: transparent url(../wavegrid.png); }
+  body * {
+    text-shadow: 0 1px 0 #fff; }
+
+hr {
+  margin: 10px 0; }
+  hr.bar {
+    position: relative;
+    background: none;
+    border: 0;
+    height: 0;
+    outline: 0;
+    border-top: 2px solid #cdcdcd;
+    border-bottom: 1px solid #f7f7f7;
+    color: #cdcdcd;
+    width: 100%; }
+    hr.bar:before, hr.bar:after {
+      content: 'o';
+      position: absolute;
+      top: -8px;
+      font-size: 11px;
+      font-weight: 600; }
+    hr.bar:before {
+      left: -6px; }
+    hr.bar:after {
+      right: -6px; }
+
+.main {
+  padding: 20px;
+  width: 550px;
+  margin: auto;
+  margin-top: 100px; }
+
+header {
+  margin-bottom: 20px; }
+  header h1 {
+    font-weight: 500;
+    text-transform: lowercase;
+    margin-bottom: 0;
+    display: inline-block;
+    margin-right: 120px; }
+    header h1 a {
+      color: silver; }
+    header h1 small {
+      color: #bbbbbb;
+      font-weight: 200;
+      font-size: 18px; }
+
+nav {
+  display: inline-block;
+  padding-bottom: 4px;
+  margin-left: 5px;
+  text-transform: lowercase; }
+  nav em {
+    color: #b3b3b3;
+    font-size: 13px;
+    padding-right: 6px; }
+  nav a {
+    color: #b3b3b3; }
+    nav a:before {
+      content: '-';
+      margin: 0 5px;
+      border: 0;
+      text-decoration: none; }
+    nav a:nth-of-type(1):before {
+      content: none; }
+
+form span.marker {
+  color: #a6a6a6;
+  display: inline-block; }
+form .input .marker {
+  -webkit-animation: jiggle 6s infinite;
+  color: #b3b3b3;
+  display: inline;
+  font-size: 1.5em;
+  padding-right: 10px;
+  display: inline-block; }
+form .input input[type=text] {
+  background: none;
+  border: none;
+  outline: none;
+  width: 400px;
+  overflow: visible;
+  font-size: 26px;
+  color: gray;
+  font-weight: 100; }
+
+label.for-checkbox {
+  display: inline-block; }
+label.complete {
+  text-decoration: line-through; }
+
+@-webkit-keyframes jiggle {
+  0% {
+    -webkit-transform: rotate(0deg); }
+
+  10% {
+    -webkit-transform: rotate(10deg); }
+
+  20% {
+    -webkit-transform: rotate(-10deg); }
+
+  30% {
+    -webkit-transform: rotate(10deg); }
+
+  40% {
+    -webkit-transform: rotate(-10deg); }
+
+  50% {
+    -webkit-transform: rotate(0deg); }
+
+  60% {
+    -webkit-transform: rotate(0deg); }
+
+  70% {
+    -webkit-transform: rotate(0deg); }
+
+  80% {
+    -webkit-transform: rotate(0deg); }
+
+  90% {
+    -webkit-transform: rotate(0deg); }
+
+  100% {
+    -webkit-transform: rotate(0deg); } }

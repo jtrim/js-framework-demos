@@ -1,25 +1,39 @@
+App.config ($routeProvider) ->
+  $routeProvider
+    .when "/", templateUrl: 'tasks-template', controller: 'TasksController', reloadOnSearch: false
 
-window.App ||= {}
+App.controller 'TasksController', ($scope, $routeParams, Task) ->
 
-class App.LocalStorage
+  setTasks = ->
+    $scope.tasks = if match = String($routeParams.state).match /(current|done)/
+      Task[match[0]]()
+    else
+      Task.all()
 
-  @nextIdFor: (name) ->
-    @all(name).length + 1
+  setTasks()
 
-  @all: (name) ->
-    if !localStorage.getItem(name)
-      localStorage.setItem name, JSON.stringify([])
-    JSON.parse localStorage.getItem(name)
+  $scope.$on '$routeUpdate', -> setTasks()
 
-  @get: (name, id) ->
-    _.findWhere @all(name), {id: id}
+  $scope.$watch 'tasks', (changes) ->
+    _.each changes, (task) ->
+      Task.update _.pick(task, 'id', 'description', 'complete')
+    $scope.taskCount = Task.all().length
+    $scope.incompleteCount = Task.where(complete: false).length
+  , true
+  $scope.classFor = (task) ->
+    if task.complete
+      'complete'
 
-  @set: (name, obj) ->
-    obj.id ||= @nextIdFor(name)
-    obj.id = parseInt(obj.id)
-    all = @all(name)
-    ids = _.pluck(all, 'id')
-    if (ids.indexOf(obj.id) > -1)
-      all.splice(ids.indexOf(obj.id), 1)
-    all.push obj
-    localStorage.setItem name, JSON.stringify(all)
+App.controller 'NewTaskController', ($scope, Task) ->
+  $scope.clearCompletedTasks = ->
+    _.each Task.where(complete: true), (task) ->
+      Task.destroy(task)
+    $scope.$parent.$parent.tasks = Task.all()
+  $scope.clearAllTasks = ->
+    $scope.$parent.$parent.tasks = Task.clear()
+
+  $scope.addTask = (taskForm, task) ->
+    if taskForm.$valid
+      Task.create task
+      $scope.task = {}
+      $scope.$parent.$parent.tasks = Task.all()
