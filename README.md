@@ -13,9 +13,9 @@ It watches the file system for changes and compiles coffee / scss and reloads th
 - Navigate to `file://path/to/demo.html` in a web browser
 - Open `demo.html` and `src/demo.coffee` and start coding
 
-#### The annotated source
+#### The annotated source for `src/application.coffee`
 
-…lives in `docs/application.html`. Have a good read over this if you want a quick detailed overview of the javascript that drives this app.
+…lives in `docs/application.html`. Open this in a browser and have a look if you want a quick detailed overview of the javascript that drives this app.
 
 #### About the files
 
