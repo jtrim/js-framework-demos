@@ -35,11 +35,11 @@
           </li>
         </ul>
         <div class='status'>
-          <ng-pluralize count='taskCount' when="{0: 'No tasks.', one: '1 task', other: '{} tasks'}"></ng-pluralize>,
-          <ng-pluralize count='incompleteCount' when="{0: 'All done!', one: '1 left.', other: '{} left.'}"></ng-pluralize>
+          <ng-pluralize count='taskCount' when="{0: 'No tasks.', one: 'One task', other: '{} tasks'}"></ng-pluralize><!--
+          --><ng-pluralize count='incompleteCount' when="{0: ', all complete.', one: ', one left to do.', other: ', {} left to do.'}" ng-show="taskCount > 0"></ng-pluralize>
         </div>
         <div class='nuke' ng-click="nukeAllTasks()">
-          &#x2716;
+          &#x2716; nuke
         </div>
       </script>
 
