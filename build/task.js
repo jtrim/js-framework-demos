@@ -5,18 +5,7 @@
   App.factory("Task", function() {
     return {
       all: function() {
-        return LocalStorage.all('tasks').sort(function(a, b) {
-          var aX, bX;
-          aX = a.description[0].toLowerCase();
-          bX = b.description[0].toLowerCase();
-          if (aX < bX) {
-            return -1;
-          } else if (aX > bX) {
-            return 1;
-          } else {
-            return 0;
-          }
-        });
+        return LocalStorage.all('tasks');
       },
       where: function(conditions) {
         return _.filter(this.all(), function(task) {

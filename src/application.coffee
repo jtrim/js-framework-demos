@@ -23,6 +23,11 @@ App.controller 'TasksController', ($scope, $routeParams, Task) ->
   $scope.classFor = (task) ->
     if task.complete
       'complete'
+  $scope.taskSorter = (task) ->
+    "#{task.complete}#{task.description}"
+  $scope.nukeAllTasks = ->
+    Task.clear()
+    $scope.tasks = Task.all()
 
 App.controller 'NewTaskController', ($scope, Task) ->
   $scope.clearCompletedTasks = ->

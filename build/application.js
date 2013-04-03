@@ -28,10 +28,17 @@
         complete: false
       }).length;
     }, true);
-    return $scope.classFor = function(task) {
+    $scope.classFor = function(task) {
       if (task.complete) {
         return 'complete';
       }
+    };
+    $scope.taskSorter = function(task) {
+      return "" + task.complete + task.description;
+    };
+    return $scope.nukeAllTasks = function() {
+      Task.clear();
+      return $scope.tasks = Task.all();
     };
   });
 

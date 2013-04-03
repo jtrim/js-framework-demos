@@ -29,21 +29,25 @@
         <ng-include src="'task-form-template'"></ng-include>
         <div class='no-tasks' ng-show="!tasks.length">Nothing to do!</div>
         <ul class='tasks' ng-show='tasks.length'>
-          <li ng-repeat="task in tasks">
-            <input type="checkbox" ng-model="task.complete" id='task-{{task.id}}' />
-            <label class='for-checkbox' ng-class='classFor(task)' for='task-{{task.id}}'>{{task.description}}</label>
+          <li ng-repeat="task in tasks | orderBy:taskSorter" ng-class='classFor(task)'>
+            <label class='for-checkbox' for='task-{{task.id}}'></label><input type="checkbox" ng-model="task.complete" id='task-{{task.id}}' />
+            {{task.description}}
           </li>
         </ul>
         <div class='status'>
           <ng-pluralize count='taskCount' when="{0: 'No tasks.', one: '1 task', other: '{} tasks'}"></ng-pluralize>,
           <ng-pluralize count='incompleteCount' when="{0: 'All done!', one: '1 left.', other: '{} left.'}"></ng-pluralize>
         </div>
+        <div class='nuke' ng-click="nukeAllTasks()">
+          &#x2716;
+        </div>
       </script>
 
       <script type="text/ng-template" id="task-form-template">
-        <form ng-controller="NewTaskController" name="taskForm" ng-submit='addTask(taskForm, task)'>
+        <form ng-controller="NewTaskController" name="taskForm" ng-submit='addTask(taskForm, task)' novalidate>
           <div class='input'>
-            <span class='marker'>&#x27BD;</span><input type="text" name="taskDescription" ng-model="task.description" autofocus placeholder='what do you need to do?' />
+            <span class='error-message' ng-show="taskForm.taskDescription.$error.required">describe your task</span>
+            <span class='marker'>&#x27BD;</span><input type="text" name="taskDescription" ng-model="task.description" autofocus placeholder='what do you need to do?' required />
           </div>
         </form>
       </script>

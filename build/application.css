@@ -28,10 +28,46 @@ hr {
       right: -6px; }
 
 .main {
+  position: relative;
   padding: 20px;
   width: 550px;
   margin: auto;
   margin-top: 100px; }
+
+.status {
+  padding: 10px;
+  font-style: italic;
+  border-top: 1px solid gray;
+  border-bottom: 1px solid white;
+  border-left: 1px solid #cdcdcd;
+  border-right: 1px solid #cdcdcd;
+  background: rgba(100, 100, 100, 0.05);
+  -webkit-border-radius: 5px;
+  color: #b3b3b3; }
+
+.tasks {
+  padding-top: 10px; }
+  .tasks li {
+    list-style-type: none;
+    line-height: 40px;
+    font-weight: 100;
+    font-size: 22px;
+    color: gray; }
+    .tasks li.complete {
+      text-decoration: line-through; }
+    .tasks li input[type='checkbox'] {
+      display: none; }
+    .tasks li label {
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+      cursor: hand; }
+      .tasks li label:before {
+        content: '\2022';
+        color: #cdcdcd; }
+    .tasks li.complete label:before {
+      content: '\2714';
+      color: #9a9a9a; }
 
 header {
   margin-bottom: 20px; }
@@ -67,30 +103,55 @@ nav {
     nav a:nth-of-type(1):before {
       content: none; }
 
-form span.marker {
-  color: #a6a6a6;
-  display: inline-block; }
-form .input .marker {
-  -webkit-animation: jiggle 6s infinite;
-  color: #b3b3b3;
-  display: inline;
-  font-size: 1.5em;
-  padding-right: 10px;
-  display: inline-block; }
-form .input input[type=text] {
-  background: none;
-  border: none;
-  outline: none;
-  width: 400px;
-  overflow: visible;
-  font-size: 26px;
-  color: gray;
-  font-weight: 100; }
+.nuke {
+  position: absolute;
+  cursor: pointer;
+  cursor: hand;
+  right: 20px;
+  margin-top: 20px;
+  color: #b3b3b3; }
+
+.no-tasks {
+  margin: 30px 0;
+  padding: 3px 10px;
+  color: #ccffcc;
+  font-size: 20px;
+  background: gray;
+  text-shadow: none;
+  -webkit-border-radius: 3px;
+  border-bottom: 1px solid white; }
+
+form {
+  position: relative; }
+  form span.error-message {
+    color: #ff9999;
+    font-weight: 400;
+    display: inline;
+    position: absolute;
+    right: 0;
+    top: 10px; }
+  form span.marker {
+    color: #a6a6a6;
+    display: inline-block; }
+  form .input .marker {
+    -webkit-animation: jiggle 6s infinite;
+    color: #b3b3b3;
+    display: inline;
+    font-size: 1.5em;
+    padding-right: 10px;
+    display: inline-block; }
+  form .input input[type=text] {
+    background: none;
+    border: none;
+    outline: none;
+    width: 400px;
+    overflow: visible;
+    font-size: 26px;
+    color: gray;
+    font-weight: 100; }
 
 label.for-checkbox {
   display: inline-block; }
-label.complete {
-  text-decoration: line-through; }
 
 @-webkit-keyframes jiggle {
   0% {

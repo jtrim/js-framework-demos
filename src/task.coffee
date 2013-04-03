@@ -3,10 +3,7 @@ App.factory "Task", ->
   # QUERYING
   #
   all: ->
-    LocalStorage.all('tasks').sort (a, b) ->
-      aX = a.description[0].toLowerCase()
-      bX = b.description[0].toLowerCase()
-      if aX < bX then -1 else if aX > bX then 1 else 0
+    LocalStorage.all('tasks')
   where: (conditions) ->
     _.filter @all(), (task) ->
       _.isEqual _.pick(task, _.keys(conditions)...), conditions
