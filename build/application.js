@@ -43,17 +43,6 @@
   });
 
   App.controller('NewTaskController', function($scope, Task) {
-    $scope.clearCompletedTasks = function() {
-      _.each(Task.where({
-        complete: true
-      }), function(task) {
-        return Task.destroy(task);
-      });
-      return $scope.$parent.$parent.tasks = Task.all();
-    };
-    $scope.clearAllTasks = function() {
-      return $scope.$parent.$parent.tasks = Task.clear();
-    };
     return $scope.addTask = function(taskForm, task) {
       if (taskForm.$valid) {
         Task.create(task);
