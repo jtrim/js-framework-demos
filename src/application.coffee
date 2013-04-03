@@ -30,12 +30,6 @@ App.controller 'TasksController', ($scope, $routeParams, Task) ->
     $scope.tasks = Task.all()
 
 App.controller 'NewTaskController', ($scope, Task) ->
-  $scope.clearCompletedTasks = ->
-    _.each Task.where(complete: true), (task) ->
-      Task.destroy(task)
-    $scope.$parent.$parent.tasks = Task.all()
-  $scope.clearAllTasks = ->
-    $scope.$parent.$parent.tasks = Task.clear()
 
   $scope.addTask = (taskForm, task) ->
     if taskForm.$valid
