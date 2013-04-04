@@ -5,9 +5,9 @@ I used [LiveReload](http://livereload.com/) when developing this demo. It watche
 
 #### TL;DR
 - Fork and clone this repo
-- Navigate to `file://path/to/index.html` in a web browser
+- Navigate to `file:///path/to/index.html` in a web browser
 - Get acquainted with how the app is supposed to work
-- Navigate to `file://path/to/demo.html` in a web browser
+- Navigate to `file:///path/to/demo.html` in a web browser
 - Open `demo.html` and `src/demo.coffee` and start coding
 
 #### The annotated source for `src/application.coffee`
