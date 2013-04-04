@@ -1,10 +1,7 @@
 # AngularJS demo
 
-#### Do yourself a favor and go download [LiveReload](http://livereload.com/)*
-
-It watches the file system for changes and compiles coffee / scss and reloads the browser automatically.
-
-\* If you don't want to pay $10 (but trust me, you do), then you can just start by editing `build/demo.js`. Just be wary of this getting overwritten if you ever do decide to use LiveReload.
+* Quick note about asset compilation - 
+I used [LiveReload](http://livereload.com/) when developing this demo. It watches the file system for changes and compiles coffee / scss and reloads the browser automatically. If you don't have it / want to pay $10 for it, then you can just start by editing `build/demo.js` in stead of `src/demo.coffee`. Just be wary of this getting overwritten if you ever do decide to use LiveReload.
 
 #### TL;DR
 - Fork and clone this repo
