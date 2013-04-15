@@ -1,27 +1,27 @@
-App.factory "Task", ->
+App.Task = Ember.Object.extend
 
   # QUERYING
   #
-  all: ->
+  @all: ->
     LocalStorage.all('tasks')
-  where: (conditions) ->
+  @where: (conditions) ->
     _.filter @all(), (task) ->
       _.isEqual _.pick(task, _.keys(conditions)...), conditions
-  current: ->
+  @current: ->
     @where(complete: false)
-  done: ->
+  @done: ->
     @where(complete: true)
 
 
   # MODIFYING
   #
-  update: (task) ->
+  @update: (task) ->
     LocalStorage.set('tasks', task)
-  destroy: (task) ->
+  @destroy: (task) ->
     LocalStorage.remove('tasks', task)
-  clear: ->
+  @clear: ->
     LocalStorage.clear('tasks')
-  create: (taskAttributes) ->
+  @create: (taskAttributes) ->
     taskAttributes.complete ||= false
     LocalStorage.set('tasks', taskAttributes)
 
