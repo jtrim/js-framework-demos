@@ -1,4 +1,4 @@
-# AngularJS demo
+# EmberJS demo
 
 * Quick note about asset compilation - 
 I used [LiveReload](http://livereload.com/) when developing this demo. It watches the file system for changes and compiles coffee / scss and reloads the browser automatically. If you don't have it / don't want to pay $10 for it, then you can just start by editing `build/demo.js` in stead of `src/demo.coffee`. Just be wary of this getting overwritten if you ever do decide to use LiveReload.
@@ -30,9 +30,6 @@ src                    # Editable source files here
 build                  # Where the files are sourced in the HTML. My LiveReload builds to this dir.
   | ...
 
-lib                    # Dependencies (angularjs, underscorejs, normalize css, zurb foundation css)
+lib                    # Dependencies (emberjs, underscorejs, normalize css, zurb foundation css)
   | ...
 ```
-
-- While `src/local-storage.coffee` and `src/task.coffee` are important to this particular app, they don't bear any direct relevance to learning AngularJS. Other than knowing the API methods in `src/task.coffee`, you can safely ignore both of these files.
-- `src/task.coffee` expects you to have already defined `App = angular.module('App', [])` before it is loaded, so just be aware of this.
