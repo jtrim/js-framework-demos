@@ -7,24 +7,60 @@
     <title>Tasks to complete</title>
   </head>
 
-  <body ng-app="App">
-    <div class="main">
-      <header>
-        <h1>
-          <a>Tasks
-            <small>to complete</small>
-          </a>
-        </h3>
-        <hr class='bar' />
-      </header>
-    </div>
+  <body>
+
+    <script type="text/x-handlebars">
+      <div class="main">
+        <header>
+          <h1>
+            <a>Tasks
+              <small>to complete</small>
+            </a>
+          </h3>
+          <hr class='bar' />
+        </header>
+        {{outlet}}
+      </div>
+    </script>
+
+    <script type="text/x-handlebars" id="_task-form">
+      <form novalidate {{action "saveTask" on="submit"}}>
+        <div class='input'>
+          <span class='error-message'>describe your task</span>
+          <span class='marker'>&#x27BD;</span><!--
+       -->{{view Ember.TextField valueBinding="task.description" autofocus=true placeholder="what do you need to do?"}}
+        </div>
+      </form>
+    </script>
+
+    <script type="text/x-handlebars" id='_task'>
+      <label class='for-checkbox' for="task-{{unbound id}}"></label><!--
+      -->{{view Ember.Checkbox checkedBinding="complete" elementId="task-{{unbound id}}"}}
+      {{description}}
+    </script>
+
+    <script type="text/x-handlebars" id="index">
+      {{partial "task-form"}}
+      <ul class='tasks'>
+        {{#each tasks}}
+          {{partial "task"}}
+        {{/each}}
+      </ul>
+    </script>
 
     <script src="lib/underscore.js"></script>
-    <script src="lib/angular.js"></script>
-    <!--UNCOMMENT TO GET STARTED-->
-    <!--<script>App = angular.module('App', []);</script>-->
-    <!--<script src="build/local-storage.js"></script>-->
-    <!--<script src="build/task.js"></script>-->
-    <!--<script src="build/demo.js"></script>-->
+    <script src="lib/jquery.js"></script>
+    <script src="lib/handlebars.js"></script>
+    <script src="lib/ember.js"></script>
+    <script>
+      Ember.TextField.reopen({
+        attributeBindings: ["autofocus"],
+        autofocus: true
+      });
+      window.App = Ember.Application.create();
+    </script>
+    <script src="build/local-storage.js"></script>
+    <script src="build/task.js"></script>
+    <script src="build/demo.js"></script>
   </body>
 </html>

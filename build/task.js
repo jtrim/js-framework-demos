@@ -2,40 +2,34 @@
 (function() {
   var __slice = [].slice;
 
-  App.factory("Task", function() {
-    return {
-      all: function() {
-        return LocalStorage.all('tasks');
-      },
-      where: function(conditions) {
-        return _.filter(this.all(), function(task) {
-          return _.isEqual(_.pick.apply(_, [task].concat(__slice.call(_.keys(conditions)))), conditions);
-        });
-      },
-      current: function() {
-        return this.where({
-          complete: false
-        });
-      },
-      done: function() {
-        return this.where({
-          complete: true
-        });
-      },
-      update: function(task) {
-        return LocalStorage.set('tasks', task);
-      },
-      destroy: function(task) {
-        return LocalStorage.remove('tasks', task);
-      },
-      clear: function() {
-        return LocalStorage.clear('tasks');
-      },
-      create: function(taskAttributes) {
-        taskAttributes.complete || (taskAttributes.complete = false);
-        return LocalStorage.set('tasks', taskAttributes);
-      }
-    };
+  App.Task = Ember.Object.extend({
+    complete: false,
+    save: function() {
+      return LocalStorage.set('tasks', this.getProperties('id', 'complete', 'description'));
+    }
+  });
+
+  App.Task.reopenClass({
+    all: function() {
+      return Ember.A(LocalStorage.all('tasks')).map(function(taskAttrs) {
+        return App.Task.create(taskAttrs);
+      });
+    },
+    where: function(conditions) {
+      return _.filter(this.all(), function(task) {
+        return _.isEqual(_.pick.apply(_, [task].concat(__slice.call(_.keys(conditions)))), conditions);
+      });
+    },
+    current: function() {
+      return this.where({
+        complete: false
+      });
+    },
+    done: function() {
+      return this.where({
+        complete: true
+      });
+    }
   });
 
 }).call(this);
