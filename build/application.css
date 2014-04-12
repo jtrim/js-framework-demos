@@ -1,8 +1,7 @@
 body {
-  padding: 10px;
-  background: transparent url(../wavegrid.png); }
+  padding: 10px; }
   body * {
-    text-shadow: 0 1px 0 #fff; }
+    font-family: "Signika"; }
 
 hr {
   margin: 10px 0; }
@@ -37,17 +36,15 @@ hr {
 .status {
   padding: 10px;
   font-style: italic;
-  border-top: 1px solid gray;
-  border-bottom: 1px solid white;
-  border-left: 1px solid #cdcdcd;
-  border-right: 1px solid #cdcdcd;
-  background: rgba(100, 100, 100, 0.05);
-  -webkit-border-radius: 5px;
-  color: #b3b3b3; }
+  color: #b3b3b3;
+  text-align: center; }
+  .status:before, .status:after {
+    content: '-'; }
 
 .tasks {
   padding-top: 10px; }
   .tasks li {
+    position: relative;
     list-style-type: none;
     line-height: 40px;
     font-weight: 100;
@@ -55,34 +52,56 @@ hr {
     color: gray; }
     .tasks li.complete {
       text-decoration: line-through; }
+    .tasks li .trash {
+      font-family: FontAwesome;
+      display: none;
+      margin-left: 10px; }
+      .tasks li .trash:hover {
+        color: #ff3333 !important; }
+    .tasks li:hover .trash {
+      color: #cccccc;
+      display: inline-block; }
     .tasks li input[type='checkbox'] {
       display: none; }
     .tasks li label {
       width: 30px;
       height: 30px;
       cursor: pointer;
-      cursor: hand; }
+      padding-right: 38px;
+      display: inline-block;
+      text-decoration: none; }
       .tasks li label:before {
-        content: '\2022';
+        font-family: 'FontAwesome';
+        content: '\f10c';
+        color: #9a9a9a; }
+    .tasks li.complete {
+      color: #cccccc; }
+      .tasks li.complete label:before {
+        content: '\f05d';
         color: #cdcdcd; }
-    .tasks li.complete label:before {
-      content: '\2714';
-      color: #9a9a9a; }
 
 header {
   margin-bottom: 20px; }
   header h1 {
     font-weight: 500;
-    text-transform: lowercase;
     margin-bottom: 0;
-    display: inline-block;
-    margin-right: 120px; }
-    header h1 a {
-      color: silver; }
+    padding: 3px 15px;
+    background: #cccccc; }
+    header h1 a,
+    header h1 a:link,
+    header h1 a:hover,
+    header h1 a:visited {
+      color: #ffffcc;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      cursor: pointer; }
     header h1 small {
-      color: #bbbbbb;
+      text-transform: lowercase;
+      color: #9a9a9a;
       font-weight: 200;
-      font-size: 18px; }
+      font-size: 15px;
+      text-shadow: none;
+      letter-spacing: 1px; }
 
 nav {
   display: inline-block;
@@ -109,7 +128,7 @@ nav {
   cursor: hand;
   right: 20px;
   margin-top: 20px;
-  color: #b3b3b3; }
+  color: #d2d2d2; }
 
 .no-tasks {
   margin: 30px 0;
@@ -119,26 +138,31 @@ nav {
   text-shadow: none;
   font-weight: 600; }
 
-form {
+.input {
   position: relative; }
-  form span.error-message {
+  .input span.error-message {
+    display: none;
     color: #ff9999;
     font-weight: 400;
-    display: inline;
     position: absolute;
     right: 0;
     top: 10px; }
-  form span.marker {
+    .input span.error-message.has-errors {
+      display: inline; }
+    .input span.error-message:before, .input span.error-message:after {
+      content: '...'; }
+  .input span.marker {
     color: #a6a6a6;
     display: inline-block; }
-  form .input .marker {
+  .input .marker {
+    font-family: FontAwesome;
     -webkit-animation: jiggle 6s infinite;
+    font-size: 20px;
     color: #b3b3b3;
     display: inline;
-    font-size: 1.5em;
     padding-right: 10px;
     display: inline-block; }
-  form .input input[type=text] {
+  .input input[type=text] {
     background: none;
     border: none;
     outline: none;
@@ -152,35 +176,17 @@ label.for-checkbox {
   display: inline-block; }
 
 @-webkit-keyframes jiggle {
-  0% {
-    -webkit-transform: rotate(0deg); }
-
-  10% {
-    -webkit-transform: rotate(10deg); }
-
-  20% {
-    -webkit-transform: rotate(-10deg); }
-
   30% {
-    -webkit-transform: rotate(10deg); }
+    -webkit-transform: translate(0px); }
 
   40% {
-    -webkit-transform: rotate(-10deg); }
+    -webkit-transform: translate(3px); }
 
   50% {
-    -webkit-transform: rotate(0deg); }
+    -webkit-transform: translate(0px); }
 
   60% {
-    -webkit-transform: rotate(0deg); }
+    -webkit-transform: translate(3px); }
 
   70% {
-    -webkit-transform: rotate(0deg); }
-
-  80% {
-    -webkit-transform: rotate(0deg); }
-
-  90% {
-    -webkit-transform: rotate(0deg); }
-
-  100% {
-    -webkit-transform: rotate(0deg); } }
+    -webkit-transform: translate(0px); } }

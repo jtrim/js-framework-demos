@@ -1,9 +1,8 @@
 body {
   padding: 10px;
-  background: transparent url(../wavegrid.png);
 
   * {
-    text-shadow: 0 1px 0 #fff;
+    font-family: "Signika";
   }
 }
 
@@ -50,19 +49,19 @@ hr {
 .status {
   padding: 10px;
   font-style: italic;
-  border-top: 1px solid gray;
-  border-bottom: 1px solid white;
-  border-left: 1px solid darken(#e6e6e6, 10%);
-  border-right: 1px solid darken(#e6e6e6, 10%);
-  background: rgba(100, 100, 100, 0.05);
-  -webkit-border-radius: 5px;
   color: darken(#e6e6e6, 20%);
+  text-align: center;
+  &:before,
+  &:after {
+    content: '-';
+  }
 }
 
 .tasks {
   padding-top: 10px;
 
   li {
+    position: relative;
     list-style-type: none;
     line-height: 40px;
     font-weight: 100;
@@ -73,6 +72,23 @@ hr {
       text-decoration: line-through;
     }
 
+    .trash {
+      font-family: FontAwesome;
+      display: none;
+      margin-left: 10px;
+
+      &:hover {
+        color: lighten(red, 10%)!important;
+      }
+    }
+
+    &:hover {
+      .trash {
+        color: lighten(gray, 30%);
+        display: inline-block;
+      }
+    }
+
     input[type='checkbox'] {
       display: none;
     }
@@ -81,19 +97,23 @@ hr {
       width: 30px;
       height: 30px;
       cursor: pointer;
-      cursor: hand;
+      padding-right: 38px;
+      display: inline-block;
+      text-decoration: none;
 
       &:before {
-        content: '\2022';
-        color: darken(#e6e6e6, 10%);
+        font-family: 'FontAwesome';
+        content: '\f10c';
+        color: darken(#e6e6e6, 30%);
       }
     }
 
     &.complete {
+      color: lighten(gray, 30%);
       label {
         &:before {
-          content: '\2714';
-          color: darken(#e6e6e6, 30%);
+          content: '\f05d';
+          color: darken(#e6e6e6, 10%);
         }
       }
     }
@@ -105,19 +125,27 @@ header {
   margin-bottom: 20px;
   h1 {
     font-weight: 500;
-    text-transform: lowercase;
     margin-bottom: 0;
-    display: inline-block;
-    margin-right: 120px;
+    padding: 3px 15px;
+    background: lighten(gray, 30%);
 
-    a {
-      color: darken(#e6e6e6, 15%);
+    a,
+    a:link,
+    a:hover,
+    a:visited, {
+      color: lighten(yellow, 40%);
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      cursor: pointer;
     }
 
     small {
-      color: darken(#e6e6e6, 17%);
+      text-transform: lowercase;
+      color: darken(#e6e6e6, 30%);
       font-weight: 200;
-      font-size: 18px;
+      font-size: 15px;
+      text-shadow: none;
+      letter-spacing: 1px;
     }
   }
 
@@ -155,7 +183,7 @@ nav {
   cursor: hand;
   right: 20px;
   margin-top: 20px;
-  color: darken(#e6e6e6, 20%);
+  color: darken(#e6e6e6, 8%);
 }
 
 .no-tasks {
@@ -167,16 +195,24 @@ nav {
   font-weight: 600;
 }
 
-form {
+.input {
   position: relative;
 
   span.error-message {
+    display: none;
+    &.has-errors {
+      display: inline;
+    }
+
     color: lighten(red, 30%);
     font-weight: 400;
-    display: inline;
     position: absolute;
     right: 0;
     top: 10px;
+    &:before,
+    &:after {
+      content: '...';
+    }
   }
 
   span.marker {
@@ -184,27 +220,25 @@ form {
     display: inline-block;
   }
 
-  .input {
+ .marker {
+    font-family: FontAwesome;
+    -webkit-animation: jiggle 6s infinite;
+    font-size: 20px;
+    color: darken(#e6e6e6, 20%);
+    display: inline;
+    padding-right: 10px;
+    display: inline-block;
+  }
 
-   .marker {
-      -webkit-animation: jiggle 6s infinite;
-      color: darken(#e6e6e6, 20%);
-      display: inline;
-      font-size: 1.5em;
-      padding-right: 10px;
-      display: inline-block;
-    }
-
-    input[type=text] {
-      background: none;
-      border: none;
-      outline: none;
-      width: 400px;;
-      overflow: visible;
-      font-size: 26px;
-      color: darken(#e6e6e6, 40%);
-      font-weight: 100;
-    }
+  input[type=text] {
+    background: none;
+    border: none;
+    outline: none;
+    width: 400px;;
+    overflow: visible;
+    font-size: 26px;
+    color: darken(#e6e6e6, 40%);
+    font-weight: 100;
   }
 }
 
@@ -215,38 +249,20 @@ label {
 }
 
 @-webkit-keyframes jiggle {
-  0% {
-    -webkit-transform: rotate(0deg);
-  }
-  10% {
-    -webkit-transform: rotate(10deg);
-  }
-  20% {
-    -webkit-transform: rotate(-10deg);
-  }
   30% {
-    -webkit-transform: rotate(10deg);
+    -webkit-transform: translate(0px);
   }
   40% {
-    -webkit-transform: rotate(-10deg);
+    -webkit-transform: translate(3px);
   }
   50% {
-    -webkit-transform: rotate(0deg);
+    -webkit-transform: translate(0px);
   }
   60% {
-    -webkit-transform: rotate(0deg);
+    -webkit-transform: translate(3px);
   }
   70% {
-    -webkit-transform: rotate(0deg);
-  }
-  80% {
-    -webkit-transform: rotate(0deg);
-  }
-  90% {
-    -webkit-transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(0deg);
+    -webkit-transform: translate(0px);
   }
 }
 
