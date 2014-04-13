@@ -121,13 +121,53 @@ hr {
   }
 }
 
+nav {
+  display: inline-block;
+
+  ul {
+    list-style-type: none;
+    color: lighten(gray, 15%);
+    line-height: 20px;
+    margin-bottom: 0;
+    margin-left: 15px;
+
+    &:before {
+      font-family: FontAwesome;
+      content: '\f0b0';
+    }
+  }
+
+  li {
+    display: inline-block;
+    margin-left: 5px;
+
+    a {
+      color: lighten(gray, 15%);
+      text-transform: lowercase;
+      padding: 0 4px;
+      display: inline-block;
+
+      &.active {
+        background: lighten(gray, 25%);
+        color: white;
+      }
+
+      &:hover {
+        color:white;
+      }
+    }
+  }
+}
+
 header {
+  background: lighten(gray, 35%);
   margin-bottom: 20px;
+
   h1 {
     font-weight: 500;
+    display: inline-block;
+    margin-left: 15px;
     margin-bottom: 0;
-    padding: 3px 15px;
-    background: lighten(gray, 30%);
 
     a,
     a:link,
@@ -151,32 +191,6 @@ header {
 
 }
 
-nav {
-  display: inline-block;
-  padding-bottom: 4px;
-  margin-left: 5px;
-  text-transform: lowercase;
-
-  em {
-    color: darken(#e6e6e6, 20%);
-    font-size: 13px;
-    padding-right: 6px;
-  }
-
-  a {
-    color: darken(#e6e6e6, 20%);
-    &:before {
-      content: '-';
-      margin: 0 5px;
-      border: 0;
-      text-decoration: none;
-    }
-    &:nth-of-type(1):before {
-      content: none;
-    }
-  }
-}
-
 .nuke {
   position: absolute;
   cursor: pointer;
@@ -191,8 +205,7 @@ nav {
   padding: 3px 10px;
   color: darken(#e6e6e6, 30%);
   font-size: 20px;
-  text-shadow: none;
-  font-weight: 600;
+  color: lighten(gray, 30%);
 }
 
 .input {

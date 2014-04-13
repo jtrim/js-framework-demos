@@ -80,13 +80,39 @@ hr {
         content: '\f05d';
         color: #cdcdcd; }
 
+nav {
+  display: inline-block; }
+  nav ul {
+    list-style-type: none;
+    color: #a6a6a6;
+    line-height: 20px;
+    margin-bottom: 0;
+    margin-left: 15px; }
+    nav ul:before {
+      font-family: FontAwesome;
+      content: '\f0b0'; }
+  nav li {
+    display: inline-block;
+    margin-left: 5px; }
+    nav li a {
+      color: #a6a6a6;
+      text-transform: lowercase;
+      padding: 0 4px;
+      display: inline-block; }
+      nav li a.active {
+        background: silver;
+        color: white; }
+      nav li a:hover {
+        color: white; }
+
 header {
+  background: #d9d9d9;
   margin-bottom: 20px; }
   header h1 {
     font-weight: 500;
-    margin-bottom: 0;
-    padding: 3px 15px;
-    background: #cccccc; }
+    display: inline-block;
+    margin-left: 15px;
+    margin-bottom: 0; }
     header h1 a,
     header h1 a:link,
     header h1 a:hover,
@@ -103,25 +129,6 @@ header {
       text-shadow: none;
       letter-spacing: 1px; }
 
-nav {
-  display: inline-block;
-  padding-bottom: 4px;
-  margin-left: 5px;
-  text-transform: lowercase; }
-  nav em {
-    color: #b3b3b3;
-    font-size: 13px;
-    padding-right: 6px; }
-  nav a {
-    color: #b3b3b3; }
-    nav a:before {
-      content: '-';
-      margin: 0 5px;
-      border: 0;
-      text-decoration: none; }
-    nav a:nth-of-type(1):before {
-      content: none; }
-
 .nuke {
   position: absolute;
   cursor: pointer;
@@ -135,8 +142,7 @@ nav {
   padding: 3px 10px;
   color: #9a9a9a;
   font-size: 20px;
-  text-shadow: none;
-  font-weight: 600; }
+  color: #cccccc; }
 
 .input {
   position: relative; }

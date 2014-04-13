@@ -14,10 +14,15 @@
       <div class="main">
         <header>
           <h1>
-            <a>Tasks
-              <small>to complete</small>
-            </a>
+            {{#link-to 'tasks.index'}}Tasks{{/link-to}}
           </h3>
+          <nav>
+            <ul>
+              <li>{{#link-to "tasks.index"}}All{{/link-to}}</li>
+              <li>{{#link-to "tasks.active"}}Active{{/link-to}}</li>
+              <li>{{#link-to "tasks.complete"}}Complete{{/link-to}}</li>
+            </ul>
+          </nav>
         </header>
         <div class='input'>
           <span class='error-message' {{bind-attr class='errors:has-errors'}}>{{errors}}</span>
@@ -25,24 +30,27 @@
           -->{{input type="text" placeholder='what do you need to do?' autofocus='autofocus' value=newTitle action='createTodo' autocomplete="off"}}
         </div>
         <hr />
-        <!--<div class='no-tasks'>Nothing to do!</div>-->
-        <ul class='tasks'>
-          {{#each}}
-            <li {{bind-attr class='complete'}}>
-              <label>
-                {{input type="checkbox" checked=complete}}
-              </label><!--
-              -->{{title}}
-              <a href="#" class='trash' {{action "destroy"}}>&#xf014;</a>
-            </li>
-          {{/each}}
-        </ul>
-        <div class='status'>
-          2 Tasks, one left to do.
-        </div>
-        <div class='nuke'>
-          &#x2716; nuke
-        </div>
+        {{#if length}}
+          <ul class='tasks'>
+            {{#each}}
+              <li {{bind-attr class='complete'}}>
+                <label>
+                  {{input type="checkbox" checked=complete}}
+                </label><!--
+                -->{{#if editing}}{{edit-task value=title autocomplete="off" focus-out="update" insert-newline="update" escape-press="cancel"}}{{else}}<span {{action "edit" on="doubleClick"}}>{{title}}</span>{{/if}}
+                <a href="#" class='trash' {{action "destroy"}}>&#xf014;</a>
+              </li>
+            {{/each}}
+          </ul>
+          <div class='status'>
+            {{statusLine}}
+          </div>
+        {{else}}
+          <div class='no-tasks'>No current tasks.</em></div>
+        {{/if}}
+        <footer>
+          <a class='nuke' {{action "nuke"}}>&#x2716; nuke</a>
+        </footer>
       </div>
     </script>
 
@@ -54,8 +62,7 @@
     <script src="build/application.js"></script>
     <script src="build/router.js"></script>
     <script src="build/models/task.js"></script>
-    <script src="build/views/task_label_view.js"></script>
-    <script src="build/views/task_checkbox_view.js"></script>
+    <script src="build/views/edit_task_view.js"></script>
     <script src="build/controllers/tasks_controller.js"></script>
     <script src="build/controllers/task_controller.js"></script>
   </body>

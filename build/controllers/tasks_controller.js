@@ -3,7 +3,56 @@
   App.TasksController = Ember.ArrayController.extend({
     itemController: 'task',
     sortProperties: ['complete', 'title'],
+    statusLine: (function() {
+      var length, taskLabel;
+
+      taskLabel = function(count) {
+        if (count === 1) {
+          return "task";
+        } else {
+          return "tasks";
+        }
+      };
+      length = this.get('length');
+      if (this.get('filterState')) {
+        return "" + length + " " + (this.get('filterState')) + " " + (taskLabel(length));
+      } else {
+        return "" + length + " " + (taskLabel(length)) + ", " + (this.countIncompleteTasks()) + " left to do.";
+      }
+    }).property('length', '@each.complete'),
+    setTasks: function(tasks, state) {
+      return this.setProperties({
+        model: tasks,
+        filterState: state
+      });
+    },
+    setCompletedTasks: function(tasks) {
+      return this.setTasks(tasks, 'completed');
+    },
+    setActiveTasks: function(tasks) {
+      return this.setTasks(tasks, 'active');
+    },
+    countIncompleteTasks: function() {
+      return this.reduce(function(acc, val) {
+        if (!val.get('complete')) {
+          return acc + 1;
+        } else {
+          return acc;
+        }
+      }, 0);
+    },
     actions: {
+      nuke: function() {
+        if (confirm("Nuking. Are you sure?")) {
+          return this.forEach(function(taskController) {
+            var task;
+
+            task = taskController.get('model');
+            task.deleteRecord();
+            return task.save();
+          });
+        }
+      },
       createTodo: function() {
         var _this = this;
 

@@ -1,5 +1,16 @@
 App.TaskController = Ember.ObjectController.extend
+  editing: false
   actions:
+    edit: ->
+      @set('editing', true)
+
+    cancel: ->
+      @set('editing', false)
+
+    update: ->
+      @get('model').save()
+      @set('editing', false)
+
     destroy: ->
       if confirm("Are you sure?")
         task = @get('model')

@@ -3,12 +3,43 @@
   App.Router.map(function() {
     return this.resource('tasks', {
       path: '/'
+    }, function() {
+      this.route('active');
+      return this.route('complete');
     });
   });
 
   App.TasksRoute = Ember.Route.extend({
     model: function() {
       return this.store.find('task');
+    }
+  });
+
+  App.TasksIndexRoute = Ember.Route.extend({
+    setupController: function() {
+      return this.controllerFor('tasks').setTasks(this.store.find('task'));
+    }
+  });
+
+  App.TasksActiveRoute = Ember.Route.extend({
+    setupController: function() {
+      var tasks;
+
+      tasks = this.store.filter('task', function(task) {
+        return !task.get('complete');
+      });
+      return this.controllerFor('tasks').setActiveTasks(tasks);
+    }
+  });
+
+  App.TasksCompleteRoute = Ember.Route.extend({
+    setupController: function() {
+      var tasks;
+
+      tasks = this.store.filter('task', function(task) {
+        return task.get('complete');
+      });
+      return this.controllerFor('tasks').setCompletedTasks(tasks);
     }
   });
 
