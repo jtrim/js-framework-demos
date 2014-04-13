@@ -37,8 +37,12 @@
                 <label>
                   {{input type="checkbox" checked=complete}}
                 </label><!--
-                -->{{#if editing}}{{edit-task value=title autocomplete="off" focus-out="update" insert-newline="update" escape-press="cancel"}}{{else}}<span {{action "edit" on="doubleClick"}}>{{title}}</span>{{/if}}
-                <a href="#" class='trash' {{action "destroy"}}>&#xf014;</a>
+             -->{{#if editing}}<!--
+               -->{{edit-task value=title autocomplete="off" focus-out="update" insert-newline="update" escape-press="cancel"}}<!--
+             -->{{else}}<!--
+                --><span {{action "edit" on="doubleClick"}}>{{title}}</span><!--
+              -->{{/if}}<!--
+              -->{{#unless editing}}<a href="#" class='trash' {{action "destroy"}}>&#xf014;</a>{{/unless}}
               </li>
             {{/each}}
           </ul>
@@ -46,10 +50,10 @@
             {{statusLine}}
           </div>
         {{else}}
-          <div class='no-tasks'>No current tasks.</em></div>
+          <div class='no-tasks'>No {{filterState}} tasks.</em></div>
         {{/if}}
         <footer>
-          <a class='nuke' {{action "nuke"}}>&#x2716; nuke</a>
+        <a class='nuke' {{action "nuke"}}>&#x2716; nuke {{filterState}}</a>
         </footer>
       </div>
     </script>
