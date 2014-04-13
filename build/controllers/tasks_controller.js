@@ -3,6 +3,34 @@
   App.TasksController = Ember.ArrayController.extend({
     itemController: 'task',
     sortProperties: ['complete', 'title'],
+    actions: {
+      nuke: function() {
+        if (confirm("Nuking. Are you sure?")) {
+          return this.forEach(function(taskController) {
+            var task;
+
+            task = taskController.get('model');
+            task.deleteRecord();
+            return task.save();
+          });
+        }
+      },
+      createTodo: function() {
+        var _this = this;
+
+        return this.validate() && (function() {
+          var task, title;
+
+          title = _this.get('newTitle');
+          task = _this.store.createRecord('task', {
+            title: title,
+            complete: false
+          });
+          _this.set('newTitle', '');
+          return task.save();
+        })();
+      }
+    },
     statusLine: (function() {
       var length, taskLabel;
 
@@ -40,34 +68,6 @@
           return acc;
         }
       }, 0);
-    },
-    actions: {
-      nuke: function() {
-        if (confirm("Nuking. Are you sure?")) {
-          return this.forEach(function(taskController) {
-            var task;
-
-            task = taskController.get('model');
-            task.deleteRecord();
-            return task.save();
-          });
-        }
-      },
-      createTodo: function() {
-        var _this = this;
-
-        return this.validate() && (function() {
-          var task, title;
-
-          title = _this.get('newTitle');
-          task = _this.store.createRecord('task', {
-            title: title,
-            complete: false
-          });
-          _this.set('newTitle', '');
-          return task.save();
-        })();
-      }
     },
     validate: function() {
       var title;
